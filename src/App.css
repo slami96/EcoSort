@@ -659,3 +659,168 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+/* Danish Guide Styles */
+.danish-guide-banner {
+  background: linear-gradient(135deg, #C8102E, #003893);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeIn 0.8s ease-out 0.3s both;
+  box-shadow: var(--shadow-md);
+}
+
+.danish-guide-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.danish-flag {
+  font-size: 3rem;
+}
+
+.danish-guide-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.danish-guide-content p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.danish-guide-button {
+  background: white;
+  color: #C8102E;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.danish-guide-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.danish-guide-modal {
+  max-width: 900px;
+}
+
+.danish-bins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.danish-bin-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.danish-bin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.danish-bin-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.danish-bin-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.danish-bin-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.bin-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bin-section h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bin-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bin-section li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.bin-section li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .danish-guide-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .danish-guide-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .danish-bins-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .danish-bin-image {
+    width: 60px;
+    height: 60px;
+  }
+}
