@@ -9,23 +9,228 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [showDanishGuide, setShowDanishGuide] = useState(false);
+  const [selectedBin, setSelectedBin] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [totalImpact, setTotalImpact] = useState(1247); // Example counter
+  const [totalImpact, setTotalImpact] = useState(1247);
+
+  // Danish bin data
+  const danishBins = [
+    {
+      name: 'Plastic',
+      danishName: 'Plast',
+      image: 'https://www.vana.dk/media/jlpftyie/plast.webp',
+      color: '#0066CC',
+      canGo: [
+        'Plastic bottles and containers',
+        'Plastic bags and shopping bags',
+        'Plastic trays and tubs',
+        'Freezer bags',
+        'Food packaging (emptied and scraped clean)'
+      ],
+      cannotGo: [
+        'PVC materials',
+        'Packaging with plant/insect poisons',
+        'Plastic products with electronics',
+        'Tarpaulins',
+        'Dirty or contaminated plastic'
+      ],
+      tips: 'Empty and scrape clean all food packaging before recycling'
+    },
+    {
+      name: 'Paper',
+      danishName: 'Papir',
+      image: 'https://www.vana.dk/media/moafbx1i/papir.webp',
+      color: '#4A90E2',
+      canGo: [
+        'Newspapers and magazines',
+        'Print advertising circulars',
+        'Office paper',
+        'Clean and dry paper',
+        'Envelopes (windows OK)'
+      ],
+      cannotGo: [
+        'Wet or dirty paper',
+        'Paper with PFOS (perfluorinated substances)',
+        'Tissue paper',
+        'Paper towels',
+        'Receipts (thermal paper)'
+      ],
+      tips: 'Keep paper clean and dry for best recycling quality'
+    },
+    {
+      name: 'Cardboard',
+      danishName: 'Pap',
+      image: 'https://www.vana.dk/media/bgoijumk/pap.webp',
+      color: '#8B6F47',
+      canGo: [
+        'Cardboard boxes',
+        'Cardboard tubes (toilet/kitchen rolls)',
+        'Cardboard from packaging',
+        'Clean and dry cardboard',
+        'Shipping boxes'
+      ],
+      cannotGo: [
+        'Expanded polystyrene (foam)',
+        'Wet or greasy cardboard',
+        'Wax-coated cardboard',
+        'Contaminated cardboard'
+      ],
+      tips: 'Flatten boxes to save space. Remove tape and plastic windows'
+    },
+    {
+      name: 'Glass',
+      danishName: 'Glas',
+      image: 'https://www.vana.dk/media/oxnky0ju/glas.webp',
+      color: '#2ECC71',
+      canGo: [
+        'Glass bottles and jars',
+        'Wine bottles',
+        'Food jars (emptied and scraped)',
+        'Drinking glasses',
+        'Broken glass from the above'
+      ],
+      cannotGo: [
+        'Refractory dishes (Pyrex)',
+        'Flat glass from windows',
+        'Mirrors',
+        'Light bulbs',
+        'Ceramics or porcelain'
+      ],
+      tips: 'Remove lids and rinse clean. Labels can stay on'
+    },
+    {
+      name: 'Metal',
+      danishName: 'Metal',
+      image: 'https://www.vana.dk/media/fsefhr13/metal.webp',
+      color: '#95A5A6',
+      canGo: [
+        'Food and beverage cans',
+        'Aluminum cans',
+        'Steel cans',
+        'Metal lids and caps',
+        'Small metal objects'
+      ],
+      cannotGo: [
+        'Electronics with metal',
+        'Pressurized cylinders',
+        'Hazardous waste packaging',
+        'Large metal items',
+        'Metal with electronics'
+      ],
+      tips: 'Empty and scrape clean. Plastic coatings are OK'
+    },
+    {
+      name: 'Food & Drink Cartons',
+      danishName: 'Mad- og drikkekartoner',
+      image: 'https://www.vana.dk/media/egchhhdv/mad-og-drikkekartoner.webp',
+      color: '#FF6B35',
+      canGo: [
+        'Milk cartons',
+        'Juice cartons',
+        'Tomato carton packaging',
+        'Legume cartons',
+        'Similar food carton packaging'
+      ],
+      cannotGo: [
+        'Chips bags',
+        'Coffee bags',
+        'Other composite packaging',
+        'Plastic-lined bags'
+      ],
+      tips: 'Empty contents completely. Rinse if possible'
+    },
+    {
+      name: 'Food Waste',
+      danishName: 'Mad',
+      image: 'https://www.vana.dk/media/1qdj1phy/mad.webp',
+      color: '#27AE60',
+      canGo: [
+        'Fruit and vegetable scraps',
+        'Meat and fish residues',
+        'Expired food',
+        'Coffee filters and grounds',
+        'Eggshells and peels'
+      ],
+      cannotGo: [
+        'Packaging materials',
+        'Cigarette butts',
+        'Ashes',
+        'Plastic bags',
+        'Non-food items'
+      ],
+      tips: 'Keep separate from packaging. Use compostable bags if required'
+    },
+    {
+      name: 'Hazardous Waste',
+      danishName: 'Farligt affald',
+      image: 'https://www.vana.dk/media/02yfqn2x/farligt-affald.webp',
+      color: '#E74C3C',
+      canGo: [
+        'Paints and solvents',
+        'Chlorine-containing detergents',
+        'Batteries',
+        'Aerosols',
+        'Chemicals and pesticides'
+      ],
+      cannotGo: [
+        'Fireworks',
+        'Explosives',
+        'Radioactive materials'
+      ],
+      tips: 'Take to designated hazardous waste collection points. Never mix with regular waste'
+    },
+    {
+      name: 'Textiles',
+      danishName: 'Tekstil',
+      image: 'https://www.vana.dk/media/dgxnji33/tekstil.webp',
+      color: '#9B59B6',
+      canGo: [
+        'Worn-out clothes',
+        'Torn textiles',
+        'Old towels and curtains',
+        'Stained fabric',
+        'Destroyed clothing'
+      ],
+      cannotGo: [
+        'Shoes, belts, and bags',
+        'Reusable clothing (donate instead)',
+        'Wet textiles',
+        'Textiles with chemicals/oil stains',
+        'Textiles with food debris or soil'
+      ],
+      tips: 'Donate wearable items. Only recycle truly damaged textiles'
+    },
+    {
+      name: 'Residual Waste',
+      danishName: 'Rest',
+      image: 'https://www.vana.dk/media/0p2jqywi/rest.webp',
+      color: '#34495E',
+      canGo: [
+        'Non-recyclable waste',
+        'Mixed materials',
+        'Contaminated items',
+        'Items not fitting other categories'
+      ],
+      cannotGo: [
+        'Recyclable materials',
+        'Hazardous waste',
+        'Items covered by producer responsibility'
+      ],
+      tips: 'This is the last resort. Try to recycle or properly dispose via other bins first'
+    }
+  ];
 
   // Fetch data from Sanity
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch all recycling items
         const itemsQuery = '*[_type == "recyclingItem"] | order(name asc)';
         const itemsData = await client.fetch(itemsQuery);
         setItems(itemsData);
         setFilteredItems(itemsData);
 
-        // Extract unique categories
         const uniqueCategories = [...new Set(itemsData.map(item => item.category))];
-        
-        // Create category objects with counts
         const categoriesData = uniqueCategories.map(cat => ({
           name: cat,
           count: itemsData.filter(item => item.category === cat).length,
@@ -44,16 +249,13 @@ function App() {
     fetchData();
   }, []);
 
-  // Search and filter functionality
   useEffect(() => {
     let filtered = items;
 
-    // Filter by category
     if (selectedCategory) {
       filtered = filtered.filter(item => item.category === selectedCategory);
     }
 
-    // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -64,7 +266,6 @@ function App() {
     setFilteredItems(filtered);
   }, [searchQuery, selectedCategory, items]);
 
-  // Get category icon
   const getCategoryIcon = (category) => {
     const icons = {
       'Plastic': '♻️',
@@ -80,7 +281,6 @@ function App() {
     return icons[category] || '📦';
   };
 
-  // Get category description
   const getCategoryDescription = (category) => {
     const descriptions = {
       'Plastic': 'Bottles, containers, packaging materials',
@@ -96,7 +296,6 @@ function App() {
     return descriptions[category] || 'Various recyclable items';
   };
 
-  // Handle category click
   const handleCategoryClick = (categoryName) => {
     if (selectedCategory === categoryName) {
       setSelectedCategory(null);
@@ -106,44 +305,53 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Handle item click
   const handleItemClick = (item) => {
     setSelectedItem(item);
-    setTotalImpact(prev => prev + 1); // Increment impact counter
+    setTotalImpact(prev => prev + 1);
   };
 
-  // Close modal
   const closeModal = () => {
     setSelectedItem(null);
   };
 
-  // Handle keyboard navigation for modal
+  const openDanishGuide = () => {
+    setShowDanishGuide(true);
+    setSelectedBin(null);
+  };
+
+  const closeDanishGuide = () => {
+    setShowDanishGuide(false);
+    setSelectedBin(null);
+  };
+
+  const handleBinClick = (bin) => {
+    setSelectedBin(bin);
+  };
+
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape' && selectedItem) {
-        closeModal();
+      if (e.key === 'Escape') {
+        if (selectedItem) closeModal();
+        if (showDanishGuide) closeDanishGuide();
       }
     };
 
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
-  }, [selectedItem]);
+  }, [selectedItem, showDanishGuide]);
 
   return (
     <div className="app">
-      {/* Skip to main content for accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
 
-      {/* Header */}
       <header className="header">
         <h1>EcoSort</h1>
         <p>Your intelligent guide to sustainable recycling</p>
       </header>
 
       <main id="main-content" className="container">
-        {/* Search Section */}
         <section className="search-section" aria-label="Search recycling items">
           <div className="search-container">
             <input
@@ -158,9 +366,26 @@ function App() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
+
+          {/* Danish Sorting Guide Button */}
+          <div className="danish-guide-banner">
+            <div className="danish-guide-content">
+              <span className="danish-flag">🇩🇰</span>
+              <div>
+                <h3>Sorting in Denmark?</h3>
+                <p>Learn about the 10 official Danish waste categories</p>
+              </div>
+            </div>
+            <button 
+              className="danish-guide-button"
+              onClick={openDanishGuide}
+              aria-label="View Danish sorting guide"
+            >
+              View Guide →
+            </button>
+          </div>
         </section>
 
-        {/* Loading State */}
         {loading && (
           <div className="loading" role="status" aria-live="polite">
             <div className="loading-spinner" aria-hidden="true"></div>
@@ -168,7 +393,6 @@ function App() {
           </div>
         )}
 
-        {/* Categories Section */}
         {!loading && !searchQuery && !selectedCategory && (
           <section aria-label="Recycling categories">
             <h2 className="section-title">Browse by Category</h2>
@@ -199,7 +423,6 @@ function App() {
           </section>
         )}
 
-        {/* Active Filter Display */}
         {selectedCategory && (
           <div style={{ marginTop: '2rem' }}>
             <button
@@ -224,7 +447,6 @@ function App() {
           </div>
         )}
 
-        {/* Items Grid */}
         {!loading && filteredItems.length > 0 && (
           <section aria-label="Recycling items">
             <h2 className="section-title">
@@ -266,7 +488,6 @@ function App() {
           </section>
         )}
 
-        {/* Empty State */}
         {!loading && filteredItems.length === 0 && (
           <div className="empty-state" role="status" aria-live="polite">
             <div className="empty-state-icon" aria-hidden="true">🔍</div>
@@ -296,7 +517,6 @@ function App() {
           </div>
         )}
 
-        {/* Stats Section */}
         {!loading && (
           <section className="stats-section" aria-label="Recycling impact">
             <div className="stats-content">
@@ -308,6 +528,114 @@ function App() {
           </section>
         )}
       </main>
+
+      {/* Danish Guide Modal */}
+      {showDanishGuide && (
+        <div
+          className="modal-overlay"
+          onClick={closeDanishGuide}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="danish-guide-title"
+        >
+          <div className="modal danish-guide-modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="modal-close"
+              onClick={closeDanishGuide}
+              aria-label="Close dialog"
+            >
+              ×
+            </button>
+            
+            {!selectedBin ? (
+              <>
+                <h2 id="danish-guide-title" style={{ marginBottom: '1rem' }}>
+                  🇩🇰 Danish Waste Sorting Guide
+                </h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                  Denmark has 10 official waste fractions. Click any bin to learn more.
+                </p>
+                
+                <div className="danish-bins-grid">
+                  {danishBins.map((bin) => (
+                    <div
+                      key={bin.name}
+                      className="danish-bin-card"
+                      onClick={() => handleBinClick(bin)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleBinClick(bin);
+                        }
+                      }}
+                    >
+                      <img src={bin.image} alt={`${bin.danishName} bin`} className="danish-bin-image" />
+                      <h3>{bin.danishName}</h3>
+                      <p>{bin.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => setSelectedBin(null)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--primary)',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    marginBottom: '1rem',
+                    padding: '0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  ← Back to all bins
+                </button>
+
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                  <img 
+                    src={selectedBin.image} 
+                    alt={`${selectedBin.danishName} bin`}
+                    style={{ width: '150px', height: '150px', objectFit: 'contain', margin: '0 auto 1rem' }}
+                  />
+                  <h2>{selectedBin.danishName}</h2>
+                  <p style={{ color: 'var(--text-secondary)' }}>{selectedBin.name}</p>
+                </div>
+
+                <div className="bin-details">
+                  <div className="bin-section">
+                    <h3 style={{ color: '#27AE60' }}>✅ What CAN go here:</h3>
+                    <ul>
+                      {selectedBin.canGo.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bin-section">
+                    <h3 style={{ color: '#E74C3C' }}>❌ What CANNOT go here:</h3>
+                    <ul>
+                      {selectedBin.cannotGo.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bin-section" style={{ background: 'var(--background)', padding: '1rem', borderRadius: '8px' }}>
+                    <h3 style={{ color: 'var(--primary)' }}>💡 Pro Tip:</h3>
+                    <p>{selectedBin.tips}</p>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Item Detail Modal */}
       {selectedItem && (
@@ -385,7 +713,6 @@ function App() {
         </div>
       )}
 
-      {/* Footer */}
       <footer className="footer">
         <p>EcoSort - Making recycling simple and sustainable</p>
         <p>Together we can make a difference 🌍</p>
