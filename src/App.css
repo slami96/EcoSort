@@ -659,21 +659,22 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-/* Danish Guide Styles - Matching Original Design */
+/* Danish Guide Styles - Modern & Polished */
 .danish-guide-banner {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  padding: 2rem 2.5rem;
-  border-radius: 20px;
-  margin-top: 2rem;
+  padding: 2.5rem 3rem;
+  border-radius: 24px;
+  margin-top: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   animation: fadeIn 0.8s ease-out 0.3s both;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 40px rgba(212, 116, 94, 0.25);
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .danish-guide-banner::before {
@@ -681,87 +682,109 @@ body {
   position: absolute;
   top: -50%;
   right: -10%;
-  width: 400px;
-  height: 400px;
-  background: rgba(255, 255, 255, 0.1);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   border-radius: 50%;
-  animation: float 15s ease-in-out infinite;
+  animation: float 20s ease-in-out infinite;
 }
 
 .danish-guide-content {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   position: relative;
   z-index: 1;
 }
 
 .danish-flag {
-  font-size: 3.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .danish-guide-content h3 {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 2rem;
   margin: 0 0 0.5rem 0;
   font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .danish-guide-content p {
   margin: 0;
   opacity: 0.95;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 .danish-guide-button {
   background: white;
   color: var(--primary);
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
+  padding: 1.125rem 2.5rem;
+  border-radius: 14px;
   font-size: 1.125rem;
   font-weight: 600;
   font-family: var(--font-body);
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
   position: relative;
   z-index: 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .danish-guide-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  background: #FFFFFF;
 }
 
 .danish-guide-button:active {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
+/* Modal Styling */
 .danish-guide-modal {
-  max-width: 950px;
-  max-height: 85vh;
+  max-width: 1100px;
+  max-height: 90vh;
+  padding: 3rem;
 }
 
+.danish-guide-modal h2 {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.danish-guide-modal > p {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+}
+
+/* Bins Grid */
 .danish-bins-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1.75rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  margin-top: 2.5rem;
 }
 
 .danish-bin-card {
   background: var(--surface);
   border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 1.75rem 1.25rem;
+  border-radius: 20px;
+  padding: 2.5rem 1.5rem;
   text-align: center;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -775,72 +798,137 @@ body {
   height: 100%;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   opacity: 0;
-  transition: var(--transition);
+  transition: opacity 0.4s ease;
   z-index: 0;
 }
 
 .danish-bin-card:hover {
-  transform: translateY(-6px) rotate(-1deg);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   border-color: var(--primary);
 }
 
 .danish-bin-card:hover::before {
-  opacity: 0.05;
+  opacity: 0.06;
 }
 
 .danish-bin-image {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
-  margin-bottom: 1rem;
+  margin: 0 auto 1.5rem;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.4s ease;
+}
+
+.danish-bin-card:hover .danish-bin-image {
+  transform: scale(1.1);
 }
 
 .danish-bin-card h3 {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   font-weight: 600;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
   color: var(--text-primary);
   position: relative;
   z-index: 1;
   letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
 .danish-bin-card p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   margin: 0;
   position: relative;
   z-index: 1;
+  line-height: 1.5;
 }
 
+/* Back Button */
+.danish-guide-modal button[style*="background: none"] {
+  background: none !important;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+}
+
+.danish-guide-modal button[style*="background: none"]:hover {
+  gap: 0.875rem;
+  color: var(--primary-dark);
+}
+
+/* Selected Bin Header */
+.danish-guide-modal > div[style*="text-align: center"] {
+  background: linear-gradient(135deg, rgba(212, 116, 94, 0.05), rgba(122, 155, 118, 0.05));
+  padding: 3rem;
+  border-radius: 24px;
+  margin-bottom: 3rem;
+  border: 1px solid var(--border);
+}
+
+.danish-guide-modal > div[style*="text-align: center"] img {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
+}
+
+.danish-guide-modal > div[style*="text-align: center"] h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1.5rem 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.danish-guide-modal > div[style*="text-align: center"] p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Bin Details Section */
 .bin-details {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .bin-section {
-  background: var(--background);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 2.25rem 2.5rem;
+  border-radius: 18px;
+  border: 2px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.bin-section:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .bin-section h3 {
   font-family: var(--font-display);
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.875rem;
   letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
 .bin-section ul {
@@ -850,12 +938,12 @@ body {
 }
 
 .bin-section li {
-  padding: 0.625rem 0;
-  padding-left: 2rem;
+  padding: 0.875rem 0;
+  padding-left: 2.25rem;
   position: relative;
   color: var(--text-secondary);
-  line-height: 1.7;
-  font-size: 1rem;
+  line-height: 1.8;
+  font-size: 1.0625rem;
 }
 
 .bin-section li::before {
@@ -863,165 +951,152 @@ body {
   position: absolute;
   left: 0;
   color: var(--primary);
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.375rem;
+  top: 0.75rem;
 }
 
+/* Pro Tip Section */
 .bin-section:last-child {
   background: linear-gradient(135deg, rgba(212, 116, 94, 0.08), rgba(122, 155, 118, 0.08));
   border: 2px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.bin-section:last-child::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
 }
 
 .bin-section:last-child h3 {
   color: var(--primary);
+  padding-left: 1rem;
 }
 
 .bin-section:last-child p {
   color: var(--text-primary);
   font-weight: 500;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.125rem;
+  line-height: 1.8;
   margin: 0;
+  padding-left: 1rem;
 }
 
-/* Modal header styling for Danish guide */
-.danish-guide-modal h2 {
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .danish-bins-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.danish-guide-modal > p {
-  font-size: 1.125rem;
-  line-height: 1.6;
-}
-
-/* Back button styling */
-.danish-guide-modal button[style*="background: none"] {
-  background: none !important;
-  border: none;
-  color: var(--primary);
-  cursor: pointer;
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: var(--transition);
-  font-family: var(--font-body);
-}
-
-.danish-guide-modal button[style*="background: none"]:hover {
-  gap: 0.75rem;
-  color: var(--primary-dark);
-}
-
-/* Selected bin header */
-.danish-guide-modal > div[style*="text-align: center"] {
-  background: var(--background);
-  padding: 2rem;
-  border-radius: 16px;
-  margin-bottom: 2rem;
-}
-
-.danish-guide-modal > div[style*="text-align: center"] img {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-}
-
-.danish-guide-modal > div[style*="text-align: center"] h2 {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 1rem 0 0.5rem;
-}
-
-.danish-guide-modal > div[style*="text-align: center"] p {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .danish-guide-banner {
     flex-direction: column;
     text-align: center;
-    padding: 1.75rem 1.5rem;
+    padding: 2rem 1.75rem;
     gap: 1.5rem;
   }
 
   .danish-guide-content {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .danish-flag {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 
   .danish-guide-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .danish-guide-content p {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .danish-guide-button {
     width: 100%;
-    padding: 0.875rem 1.5rem;
-  }
-
-  .danish-bins-grid {
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .danish-bin-image {
-    width: 70px;
-    height: 70px;
-  }
-
-  .danish-bin-card h3 {
-    font-size: 1.125rem;
-  }
-
-  .danish-bin-card p {
-    font-size: 0.85rem;
+    padding: 1rem 2rem;
   }
 
   .danish-guide-modal {
-    margin: 1rem;
+    padding: 2rem 1.5rem;
+    margin: 0.5rem;
   }
 
-  .bin-section {
-    padding: 1.25rem;
+  .danish-guide-modal h2 {
+    font-size: 2rem;
   }
 
-  .bin-section h3 {
+  .danish-guide-modal > p {
+    font-size: 1.0625rem;
+  }
+
+  .danish-bins-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .danish-bin-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .danish-bin-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .danish-bin-card h3 {
     font-size: 1.25rem;
   }
 
+  .danish-bin-card p {
+    font-size: 0.9375rem;
+  }
+
+  .bin-section {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .bin-section h3 {
+    font-size: 1.375rem;
+  }
+
   .bin-section li {
-    font-size: 0.95rem;
-    padding-left: 1.75rem;
+    font-size: 1rem;
+    padding-left: 2rem;
+  }
+
+  .danish-guide-modal > div[style*="text-align: center"] {
+    padding: 2rem 1.5rem;
+  }
+
+  .danish-guide-modal > div[style*="text-align: center"] h2 {
+    font-size: 2rem;
   }
 }
 
-/* Animation for bin cards */
-.danish-bin-card:nth-child(1) { animation: scaleIn 0.5s ease-out 0.1s backwards; }
-.danish-bin-card:nth-child(2) { animation: scaleIn 0.5s ease-out 0.15s backwards; }
-.danish-bin-card:nth-child(3) { animation: scaleIn 0.5s ease-out 0.2s backwards; }
-.danish-bin-card:nth-child(4) { animation: scaleIn 0.5s ease-out 0.25s backwards; }
-.danish-bin-card:nth-child(5) { animation: scaleIn 0.5s ease-out 0.3s backwards; }
-.danish-bin-card:nth-child(6) { animation: scaleIn 0.5s ease-out 0.35s backwards; }
-.danish-bin-card:nth-child(7) { animation: scaleIn 0.5s ease-out 0.4s backwards; }
-.danish-bin-card:nth-child(8) { animation: scaleIn 0.5s ease-out 0.45s backwards; }
-.danish-bin-card:nth-child(9) { animation: scaleIn 0.5s ease-out 0.5s backwards; }
-.danish-bin-card:nth-child(10) { animation: scaleIn 0.5s ease-out 0.55s backwards; }
+@media (max-width: 480px) {
+  .danish-bins-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Staggered Animation */
+.danish-bin-card:nth-child(1) { animation: scaleIn 0.5s ease-out 0.05s backwards; }
+.danish-bin-card:nth-child(2) { animation: scaleIn 0.5s ease-out 0.1s backwards; }
+.danish-bin-card:nth-child(3) { animation: scaleIn 0.5s ease-out 0.15s backwards; }
+.danish-bin-card:nth-child(4) { animation: scaleIn 0.5s ease-out 0.2s backwards; }
+.danish-bin-card:nth-child(5) { animation: scaleIn 0.5s ease-out 0.25s backwards; }
+.danish-bin-card:nth-child(6) { animation: scaleIn 0.5s ease-out 0.3s backwards; }
+.danish-bin-card:nth-child(7) { animation: scaleIn 0.5s ease-out 0.35s backwards; }
+.danish-bin-card:nth-child(8) { animation: scaleIn 0.5s ease-out 0.4s backwards; }
+.danish-bin-card:nth-child(9) { animation: scaleIn 0.5s ease-out 0.45s backwards; }
+.danish-bin-card:nth-child(10) { animation: scaleIn 0.5s ease-out 0.5s backwards; }
