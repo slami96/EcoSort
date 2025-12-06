@@ -549,10 +549,10 @@ function App() {
             
             {!selectedBin ? (
               <>
-                <h2 id="danish-guide-title" style={{ marginBottom: '1rem' }}>
+                <h2 id="danish-guide-title">
                   🇩🇰 Danish Waste Sorting Guide
                 </h2>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                <p>
                   Denmark has 10 official waste fractions. Click any bin to learn more.
                 </p>
                 
@@ -597,38 +597,39 @@ function App() {
                   ← Back to all bins
                 </button>
 
-                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                  <img 
-                    src={selectedBin.image} 
-                    alt={`${selectedBin.danishName} bin`}
-                    style={{ width: '150px', height: '150px', objectFit: 'contain', margin: '0 auto 1rem' }}
-                  />
-                  <h2>{selectedBin.danishName}</h2>
-                  <p style={{ color: 'var(--text-secondary)' }}>{selectedBin.name}</p>
-                </div>
-
-                <div className="bin-details">
-                  <div className="bin-section">
-                    <h3 style={{ color: '#27AE60' }}>✅ What CAN go here:</h3>
-                    <ul>
-                      {selectedBin.canGo.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
+                <div className="bin-header-wrapper">
+                  <div className="bin-header-image">
+                    <img 
+                      src={selectedBin.image} 
+                      alt={`${selectedBin.danishName} bin`}
+                    />
+                    <h2>{selectedBin.danishName}</h2>
+                    <p>{selectedBin.name}</p>
                   </div>
 
-                  <div className="bin-section">
-                    <h3 style={{ color: '#E74C3C' }}>❌ What CANNOT go here:</h3>
-                    <ul>
-                      {selectedBin.cannotGo.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div className="bin-details">
+                    <div className="bin-section">
+                      <h3 style={{ color: '#27AE60' }}>✅ What CAN go here:</h3>
+                      <ul>
+                        {selectedBin.canGo.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="bin-section" style={{ background: 'var(--background)', padding: '1rem', borderRadius: '8px' }}>
-                    <h3 style={{ color: 'var(--primary)' }}>💡 Pro Tip:</h3>
-                    <p>{selectedBin.tips}</p>
+                    <div className="bin-section">
+                      <h3 style={{ color: '#E74C3C' }}>❌ What CANNOT go here:</h3>
+                      <ul>
+                        {selectedBin.cannotGo.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="bin-section">
+                      <h3 style={{ color: 'var(--primary)' }}>💡 Pro Tip:</h3>
+                      <p>{selectedBin.tips}</p>
+                    </div>
                   </div>
                 </div>
               </>
